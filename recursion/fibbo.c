@@ -1,21 +1,25 @@
-#include<stdio.h>
-#include<conio.h>
+#include <stdio.h>
 
-int fibbonacci_recursion(int n)
+int fibb(int n)
 {
     if (n == 0)
         return 0;
     else if (n == 1)
         return 1;
     else
-        return fibbonacci_recursion(n - 1) + fibbonacci_recursion(n - 2);
+        return fibb(n - 1) + fibb(n - 2);
 }
+
 int main()
 {
     int n;
-    printf("Enter the number of terms:");
-    scanf("%d",&n);
-    printf("Fibonnacci series is:\n");
-    printf("%d\t",fibbonacci_recursion(n));
+    printf("Enter the number of terms: ");
+    scanf("%d", &n);
+
+    printf("Fibonacci series is: ");
+    for(int i=0;i<=n;i++)
+    {
+   printf("%d\t",fibb(i));
+}
     return 0;
 }
