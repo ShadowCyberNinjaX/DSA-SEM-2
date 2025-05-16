@@ -1,0 +1,20 @@
+polynomial manipulation
+-----------------------
+the required memory declarations for the representation of a polynomial
+with integer coefficients are
+
+typedef struct nodetype
+{
+    int coeff;
+    int power;
+    struct nodetype *next;
+}
+
+
+------------------------
+examples
+--------
+1. 3x^14 + 2x^8 + 1
+2. 8x^14 + 2x^2 + 1
+------------------------
+adding two polynomials c=a+b
