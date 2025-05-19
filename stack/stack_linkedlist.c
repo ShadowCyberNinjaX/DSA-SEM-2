@@ -18,17 +18,19 @@ void pop()
     struct Node* del;
     if(top==NULL)
     {
-        printf("STACK UNDERFLOW");
+        printf("STACK UNDERFLOW\n");
         exit(0);
     }
+    printf("element popped %d ",top->data);
     del=top;
     top=top->link;
     free(del);
 }
 void display()
 {
+    printf("FROM TOP TO BOTTOM!!!\n");
     if(top==NULL){
-        printf("STACK UNDERFLOW");
+        printf("STACK UNDERFLOW\n");
     }
     struct Node* temp=top;
     printf("The STACK is:  \n");
