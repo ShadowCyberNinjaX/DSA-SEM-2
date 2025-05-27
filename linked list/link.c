@@ -6,6 +6,8 @@ struct Node
     struct Node* link;
 };
 struct Node* head=NULL;
+
+//insert a node at the end of the linked list
 void insertNode(int x)
 {
     struct Node* new=(struct Node*)malloc(sizeof(struct Node*));
