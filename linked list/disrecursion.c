@@ -36,13 +36,6 @@ void print(struct node* head)
     print(head->next);
 }
 
-void printreverse(struct node* head)
-{
-    if(head==NULL) return;
-    print(head->next);
-    printf("%d -> ", head->data);
-}
-
 int main()
 {
     insert(34);
@@ -52,9 +45,5 @@ int main()
     printf("Print linked list(using recursion):\n");
     print(head);
     printf("NULL\n");
-    printf("Print linked list in reverse order(using recursion):\n");
-    printreverse(head);
-    printf("NULL\n");
-    printf("ig there is some error here...need to check later\n");
     return 0;
 }
