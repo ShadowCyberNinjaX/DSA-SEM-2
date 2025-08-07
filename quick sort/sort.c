@@ -1,66 +1,93 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-void swap(int *a, int *b) 
+void swap(int *a,int *b)
 {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+    int temp;
+    temp=*a;
+    *a=*b;
+    *b=temp;
 }
-
-int median3(int a[],int left,int right)
+int median3(int *arr,int left,int right)
 {
-    int center=(left+right)/2;
-    if(a[center]<a[left])
-        swap(&a[left],&a[center]);
-    if(a[right]<a[left])
-        swap(&a[left],&a[right]);
-    if(a[right]<a[center])
-        swap(&a[center],&a[right]);
-    swap(&a[center],&a[right-1]);
-    return a[right-1];
+    int mid=(left+right)/2;
+    if(arr[left]>arr[mid])
+        swap(&arr[left], &arr[mid]);
+    if(arr[left]>arr[right])
+        swap(&arr[left], &arr[right]);
+    if(arr[mid]>arr[right])
+        swap(&arr[mid],&arr[right]);
+    swap(&arr[mid],&arr[right-1]);
+    return arr[right-1];
 }
-
-int quicksort(int a[],int left,int right)
+int partition(int *arr,int left,int right)
 {
-    if (left + 10<=right)
+    int pivot=median3(arr,left,right);
+    int i=left;
+    int j=right-1;
+    while(i<j)
     {
-        int pivot=median3(a,left,right);
-        //begin partitioning
-        int i=left,j=right-1;
-        for(;;)
+        while(arr[i]<=pivot)
         {
-            while(a[++i]<pivot);
-            while(a[--j]>pivot);
-            if(i<j)
-                swap(&a[i],&a[j]);
-            else
-                break;
+            i++;
         }
-        swap(&a[i],&a[right-1]);
-        quicksort(a,left,i-1);
-        quicksort(a,i+1,right);
+        while(arr[j]>pivot)
+       {
+         j--;
+       } 
+       if(i<j)
+       {
+        swap(&arr[i],&arr[j]);
+       }
     }
-   /* else
-    {
-        insertsort(a,left,right);
-    }*/
+    swap(&arr[i],&arr[right-1]);
+    return i;
 }
-
-//int insertsort(int a[],int left,int right)
-
+void insert(int *arr,int left,int right)
+{
+    for(int i=left+1;i<=right;i++)
+    {
+        int key=arr[i];
+        int j=i-1;
+        while(j>=left && arr[j]>key)
+       { arr[j+1]=arr[j];
+        j--;
+        }
+    arr[j+1]=key;
+    }
+}
+void quicksort(int *arr,int left,int right)
+{
+    if(left+10<=right)
+    {
+        int pivot=partition(arr,left,right);
+        quicksort(arr,left,pivot-1);
+        quicksort(arr,pivot+1,right);
+    }
+    else
+    insert(arr, left, right);
+}
 
 int main()
 {
-    int a[] = {3, 6, 8, 10, 1, 2, 1, 5, 7, 4, 9};
-    int n = sizeof(a) / sizeof(a[0]);
-    
-    quicksort(a, 0, n - 1);
-    
-    printf("Sorted array: \n");
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+    int *arr = (int *)malloc(n * sizeof(int));
+    printf("Enter the elements:\n");
     for(int i = 0; i < n; i++)
-        printf("%d ", a[i]);
-    printf("\n");
+    {
+        scanf("%d", &arr[i]);
+    }
     
+    quicksort(arr, 0, n - 1);
+    
+    printf("Sorted array:\n");
+    for(int i = 0; i < n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    
+    free(arr);
     return 0;
 }
