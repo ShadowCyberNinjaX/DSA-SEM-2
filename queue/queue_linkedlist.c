@@ -50,14 +50,16 @@ void display()
         struct node* temp=front;
         while(temp!=NULL)
         {
-            printf("%d",temp->data);
+            printf("%d -> ",temp->data);
             temp=temp->next;
         }
+        printf("NULL\n");
     }
 }
 int main()
 {
     int choice, value;
+    printf("QUEUE USING LINKED LIST\n");
     while(1)
     {
         printf("\n1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\n");
